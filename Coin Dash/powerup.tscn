@@ -59,6 +59,7 @@ script = ExtResource("1_w1dbc")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_morsq")
 frame = 7
 frame_progress = 0.556993

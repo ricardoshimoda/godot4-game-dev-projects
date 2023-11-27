@@ -12,8 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://boit2f2q12c2x" path="res://assets/audio/Level.wav" id="8_c2ryn"]
 [ext_resource type="AudioStream" uid="uid://bbfp37kc8hlt0" path="res://assets/audio/Powerup.wav" id="9_3g5vs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ixpg"]
-size = Vector2(496, 736)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_la1fe"]
+size = Vector2(505, 740)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_48bys")
@@ -21,7 +21,9 @@ coin_scene = ExtResource("2_jgv0g")
 powerup_scene = ExtResource("3_t8t82")
 obstacle_scene = ExtResource("4_vnu32")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["playable"]]
+
+[node name="Background" type="TextureRect" parent="Area2D"]
 offset_right = 480.0
 offset_bottom = 720.0
 size_flags_horizontal = 3
@@ -29,9 +31,9 @@ size_flags_vertical = 3
 texture = ExtResource("1_25l8y")
 stretch_mode = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Background"]
-position = Vector2(238, 358)
-shape = SubResource("RectangleShape2D_0ixpg")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(242.5, 360)
+shape = SubResource("RectangleShape2D_la1fe")
 
 [node name="Player" parent="." instance=ExtResource("1_8aw67")]
 

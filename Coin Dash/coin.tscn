@@ -63,6 +63,7 @@ script = ExtResource("1_0yak0")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_2wf5s")
 frame_progress = 0.213604
 
