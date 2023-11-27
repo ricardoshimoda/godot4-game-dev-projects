@@ -1,9 +1,7 @@
 extends Area2D
+
 var screensize = Vector2.ZERO
 var coinsize = Vector2(50, 50)
-
-func _ready():
-	$Timer.start(randf_range(3,8))
 
 func pickup():
 	$CollisionShape2D.set_deferred("disabled", true)
@@ -13,10 +11,10 @@ func pickup():
 	await tw.finished
 	queue_free()
 
-func _on_timer_timeout():
-	$AnimatedSprite2D.frame = 0
-	$AnimatedSprite2D.play()
+func _on_lifetime_timeout():
+	queue_free()
 
 func _on_area_entered(area):
 	if area.is_in_group("obstacles"):
 		position = Vector2(randi_range(50, screensize.x - 50), randi_range(50, screensize.y - 50))
+
