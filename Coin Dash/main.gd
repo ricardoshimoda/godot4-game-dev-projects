@@ -35,16 +35,16 @@ func despawn_obstacles():
 		o.queue_free()
 
 func spawn_obstacles():
-	for i in randi_range(1,3):
-		var o = obstacle_scene.instantiate()
-		add_child(o)
-		o.position = Vector2(randi_range(50, screensize.x-50), randi_range(50,screensize.y - 50))	
+	var o = obstacle_scene.instantiate()
+	add_child(o)
+	o.position = Vector2(randi_range(50, screensize.x-50), randi_range(50,screensize.y - 50))	
 	
 func spawn_coins():
 	var coinborder = 50
 	for i in level + 4:
 		var c = coin_scene.instantiate()
 		add_child(c)
+		#print(c.coinsize)
 		c.screensize = screensize
 		c.position = Vector2(randi_range(coinborder, screensize.x - coinborder),
 			randi_range(coinborder, screensize.y - coinborder))
@@ -54,6 +54,7 @@ func _process(delta):
 	if playing and 	get_tree().get_nodes_in_group("coins").size() == 0:
 		level += 1
 		time_left += 5
+		spawn_obstacles()
 		spawn_coins()
 		$PowerupTimer.start(randf_range(1, time_left - 5))
 

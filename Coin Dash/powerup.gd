@@ -17,4 +17,6 @@ func _on_lifetime_timeout():
 func _on_area_entered(area):
 	if area.is_in_group("obstacles"):
 		position = Vector2(randi_range(50, screensize.x - 50), randi_range(50, screensize.y - 50))
+	else:
+		$AnimatedSprite2D.visible = true
 
