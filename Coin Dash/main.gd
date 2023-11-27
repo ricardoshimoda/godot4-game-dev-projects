@@ -27,12 +27,13 @@ func new_game():
 	spawn_coins()
 	
 func spawn_coins():
+	var coinborder = 50
 	for i in level + 4:
 		var c = coin_scene.instantiate()
 		add_child(c)
 		c.screensize = screensize
-		c.position = Vector2(randi_range(0, screensize.x),
-			randi_range(0, screensize.y))
+		c.position = Vector2(randi_range(coinborder, screensize.x - coinborder),
+			randi_range(coinborder, screensize.y - coinborder))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta):

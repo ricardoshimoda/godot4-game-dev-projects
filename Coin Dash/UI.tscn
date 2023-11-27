@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://c35fcuhltaph"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_ghqw2"]
+[ext_resource type="FontFile" uid="uid://cv4qktukq7yp" path="res://assets/Kenney Bold.ttf" id="1_qcdja"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5pjv6"]
+font = ExtResource("1_qcdja")
+font_size = 48
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[node name="UI" type="Node2D"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("1_ghqw2")
+
+[node name="Message" type="Label" parent="HUD"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Coin Dash!"
+label_settings = SubResource("LabelSettings_5pjv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TimeLeft" type="Label" parent="HUD/MarginContainer"]
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_5pjv6")
+vertical_alignment = 1
+
+[node name="ScoreRight" type="Label" parent="HUD/MarginContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_5pjv6")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="HUD"]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartButton" type="Button" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_qcdja")
+theme_override_font_sizes/font_size = 48
+text = "Start"
+
+[connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_timer_timeout"]
+[connection signal="pressed" from="HUD/StartButton" to="HUD" method="_on_start_button_pressed"]
