@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqoyl83utwie1"]
+
+[ext_resource type="PackedScene" uid="uid://cp75gfqhfjrns" path="res://enemy/enemy_paths.tscn" id="1_imdgm"]
+[ext_resource type="Texture2D" uid="uid://cvnawsrybyill" path="res://assets/enemy_saucer.png" id="1_nyyh8"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_yne8a"]
+[ext_resource type="PackedScene" uid="uid://rauw0doxaedv" path="res://exposion/explosion.tscn" id="4_apgae"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ptm1o"]
+radius = 37.054
+
+[sub_resource type="Animation" id="Animation_4kmjn"]
+resource_name = "flash"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ekmg"]
+_data = {
+"flash": SubResource("Animation_4kmjn")
+}
+
+[node name="Enemy" type="Area2D" groups=["enemies"]]
+script = ExtResource("1_yne8a")
+
+[node name="EnemyPaths" parent="." instance=ExtResource("1_imdgm")]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_nyyh8")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ptm1o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ekmg")
+}
+
+[node name="Explosion" parent="." instance=ExtResource("4_apgae")]
+visible = false
+
+[node name="GunCooldown" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]
