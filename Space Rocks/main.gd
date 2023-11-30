@@ -20,7 +20,7 @@ func spawn_rock(size, pos = null, vel = null):
 	var r = rock_scene.instantiate()
 	r.screensize = screensize
 	r.start(pos, vel, size)
-	call_deferred("add_child", r)
+	$RockSpawn.call_deferred("add_child", r)
 	r.exploded.connect(self._on_rock_exploded)
 
 func _on_rock_exploded(size, radius, pos, vel):
@@ -70,15 +70,17 @@ func _input(event):
 		get_tree().paused = not get_tree().paused
 		var message = $HUD/VBoxContainer/Message
 		if get_tree().paused:
+			$EnemyTimer.paused = true
 			message.text = "Paused"
 			message.show()
 		else:
+			$EnemyTimer.paused = false
 			message.text = ""
 			message.hide()
 			
 func _on_enemy_timer_timeout():
 	print("There should be an enemy on its way")
 	var e = enemy_scene.instantiate()
-	add_child(e)
+	$EnemySpawn.add_child(e)
 	e.target = $Player
 	$EnemyTimer.start(randf_range(20,40))

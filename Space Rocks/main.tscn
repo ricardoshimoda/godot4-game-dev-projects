@@ -21,15 +21,18 @@ enemy_scene = ExtResource("3_5n8sp")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
+process_mode = 1
 texture = ExtResource("1_ywbe0")
 centered = false
 
 [node name="Player" parent="." instance=ExtResource("2_p4sqg")]
+process_mode = 1
 visible = false
 position = Vector2(50, 50)
 rotation = -3.14159
 
 [node name="RockPath" type="Path2D" parent="."]
+process_mode = 1
 curve = SubResource("Curve2D_odkvk")
 
 [node name="RockSpawn" type="PathFollow2D" parent="RockPath"]
@@ -37,11 +40,19 @@ position = Vector2(3, 5)
 rotation = 0.00435917
 
 [node name="HUD" parent="." instance=ExtResource("5_1f45d")]
+process_mode = 1
 
 [node name="EnemyTimer" type="Timer" parent="."]
+process_mode = 1
 one_shot = true
+
+[node name="EnemySpawn" type="Node" parent="."]
+process_mode = 1
+
+[node name="RockSpawn" type="Node" parent="."]
 
 [connection signal="dead" from="Player" to="." method="game_over"]
 [connection signal="lives_changed" from="Player" to="HUD" method="update_lives"]
+[connection signal="shield_changed" from="Player" to="HUD" method="update_shield"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
