@@ -1,12 +1,15 @@
 extends RigidBody2D
 
+signal lives_changed
+signal dead
+signal shield_changed
+
 @export var bullet_scene: PackedScene
 @export var fire_rate = 0.25
 @export var engine_power = 500
 @export var spin_power = 8000
-
-signal lives_changed
-signal dead
+@export var max_shield = 100.0
+@export var shield_regen = 5.0
 
 enum { INIT, ALIVE, INVULNERABLE, DEAD }
 var state = INIT
@@ -16,14 +19,24 @@ var screensize = Vector2.ZERO
 var can_shoot = true
 var reset_pos = false
 var lives = 0: set = set_lives
+var shield = 0 : set = set_shield
 
 func set_lives(value):
 	lives = value
 	lives_changed.emit(lives)
+	shield = max_shield
 	if lives <= 0:
 		change_state(DEAD)
 	else:
 		change_state(INVULNERABLE)
+
+func set_shield(value):
+	value = min(value, max_shield)
+	shield = value
+	shield_changed.emit(shield / max_shield)
+	if shield <= 0:
+		lives -= 1
+		explode()
 
 func reset():
 	reset_pos = true
@@ -57,6 +70,7 @@ func change_state(new_state):
 
 func _process(delta):
 	get_input()
+	shield += shield_regen * delta
 
 func get_input():
 	thrust = Vector2.ZERO
@@ -98,10 +112,8 @@ func _on_invulnerability_timer_timeout():
 
 func _on_body_entered(body):
 	if body.is_in_group("rocks"):
-		print("I've hit a rock!")
+		shield -= body.size * 25
 		body.explode()
-		lives -= 1
-		explode()
 
 func explode():
 	$Explosion.show()

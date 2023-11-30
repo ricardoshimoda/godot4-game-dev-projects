@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var rock_scene : PackedScene
+@export var enemy_scene : PackedScene
+
 var screensize = Vector2.ZERO
 var level = 0
 var score = 0
@@ -38,12 +40,15 @@ func new_game():
 	$HUD.show_message("Get Ready!")
 	$Player.visible = true
 	$Player.reset()
+	get_tree().call_group("rocks", "queue_free")
+	get_tree().call_group("enemies", "queue_free")
 	await $HUD/Timer.timeout
 	playing = true
 	
 func new_level():
 	level += 1
 	$HUD.show_message("Wave %s" % level)
+	$EnemyTimer.start(randf_range(5,10))
 	for i in level:
 		spawn_rock(3)
 
@@ -55,6 +60,7 @@ func _process(delta):
 
 func game_over():
 	playing = false
+	$EnemyTimer.stop()
 	$HUD.game_over()
 
 func _input(event):
@@ -70,3 +76,9 @@ func _input(event):
 			message.text = ""
 			message.hide()
 			
+func _on_enemy_timer_timeout():
+	print("There should be an enemy on its way")
+	var e = enemy_scene.instantiate()
+	add_child(e)
+	e.target = $Player
+	$EnemyTimer.start(randf_range(20,40))

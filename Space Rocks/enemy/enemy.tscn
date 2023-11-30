@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqoyl83utwie1"]
+[gd_scene load_steps=9 format=3 uid="uid://bqoyl83utwie1"]
 
 [ext_resource type="PackedScene" uid="uid://cp75gfqhfjrns" path="res://enemy/enemy_paths.tscn" id="1_imdgm"]
 [ext_resource type="Texture2D" uid="uid://cvnawsrybyill" path="res://assets/enemy_saucer.png" id="1_nyyh8"]
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_yne8a"]
+[ext_resource type="PackedScene" uid="uid://dhwsatswbtnj2" path="res://enemy/enemy_bullet.tscn" id="2_vo3rq"]
 [ext_resource type="PackedScene" uid="uid://rauw0doxaedv" path="res://exposion/explosion.tscn" id="4_apgae"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptm1o"]
@@ -32,9 +33,7 @@ _data = {
 
 [node name="Enemy" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_yne8a")
-
-[node name="EnemyPaths" parent="." instance=ExtResource("1_imdgm")]
-visible = false
+bullet_scene = ExtResource("2_vo3rq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
@@ -43,6 +42,8 @@ hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ptm1o")
+
+[node name="EnemyPaths" parent="." instance=ExtResource("1_imdgm")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -56,4 +57,5 @@ visible = false
 wait_time = 1.5
 autostart = true
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]
