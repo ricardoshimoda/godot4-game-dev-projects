@@ -7,6 +7,8 @@ extends Area2D
 @export var health = 3
 @export var bullet_spread = 0.2
 
+signal exploded
+
 var follow
 var target = null
 
@@ -53,6 +55,7 @@ func take_damage(amount):
 		explode()
 
 func explode():
+	exploded.emit()
 	$ExplosionSound.play()
 	speed = 0
 	$GunCooldown.stop()

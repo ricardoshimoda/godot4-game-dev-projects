@@ -5,8 +5,12 @@ extends Node2D
 
 var screensize = Vector2.ZERO
 var level = 0
-var score = 0
+var score = 0 : set = set_score
 var playing = false
+
+func set_score(value):
+	score = value
+	$HUD.update_score(value)
 
 func _ready():
 	screensize = get_viewport().get_visible_rect().size
@@ -24,6 +28,7 @@ func spawn_rock(size, pos = null, vel = null):
 	r.exploded.connect(self._on_rock_exploded)
 
 func _on_rock_exploded(size, radius, pos, vel):
+	score += 60 / size
 	$ExplosionSound.play()
 	if size <= 1:
 		return
@@ -38,7 +43,6 @@ func new_game():
 	get_tree().call_group("rocks", "queue_free")
 	level = 0
 	score = 0
-	$HUD.update_score(score)
 	$HUD.show_message("Get Ready!")
 	$Player.visible = true
 	$Player.reset()
@@ -83,8 +87,11 @@ func _input(event):
 			message.hide()
 			
 func _on_enemy_timer_timeout():
-	print("There should be an enemy on its way")
 	var e = enemy_scene.instantiate()
 	$EnemySpawn.add_child(e)
 	e.target = $Player
+	e.exploded.connect(self._on_enemy_exploded)
 	$EnemyTimer.start(randf_range(20,40))
+
+func _on_enemy_exploded():
+	score += 100
