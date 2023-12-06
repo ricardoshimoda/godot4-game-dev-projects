@@ -8,11 +8,13 @@
 texture = ExtResource("1_mqvnq")
 0:0/0 = 0
 0:0/0/custom_data_0 = "cherry"
+0:0/0/custom_data_1 = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eo83j"]
 texture = ExtResource("2_mhnjv")
 0:0/0 = 0
 0:0/0/custom_data_0 = "gem"
+0:0/0/custom_data_1 = 10
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j0eoa"]
 texture = ExtResource("3_jfw7h")
@@ -24,6 +26,8 @@ texture = ExtResource("3_jfw7h")
 [resource]
 custom_data_layer_0/name = "type"
 custom_data_layer_0/type = 4
+custom_data_layer_1/name = "score"
+custom_data_layer_1/type = 2
 sources/0 = SubResource("TileSetAtlasSource_ipjv1")
 sources/1 = SubResource("TileSetAtlasSource_eo83j")
 sources/2 = SubResource("TileSetAtlasSource_j0eoa")

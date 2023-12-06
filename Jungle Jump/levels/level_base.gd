@@ -26,10 +26,13 @@ func spawn_items():
 	for cell in item_cells:
 		var data = $Items.get_cell_tile_data(0, cell)
 		var type = data.get_custom_data("type")
+		var item_score = data.get_custom_data("score")
+		print("type:%s score:%s" % [type, item_score] )
 		var item = item_scene.instantiate()
 		add_child(item)
 		item.init(type, $Items.map_to_local(cell))
-		item.picked_up.connect(self._on_item_picked_up)
+		item.picked_up.connect(self._on_item_picked_up.bind(item_score))
 
-func _on_item_picked_up():
-	score += 1
+func _on_item_picked_up(_score):
+	print("score:%s" % _score)
+	score += _score

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8blqg7xk4xa8"]
+[gd_scene load_steps=9 format=3 uid="uid://c8blqg7xk4xa8"]
 
 [ext_resource type="TileSet" uid="uid://dhxw3f8l2saqn" path="res://assets/tilesets/tiles_world.tres" id="1_gprqv"]
 [ext_resource type="Script" path="res://levels/level_base.gd" id="1_v78i6"]
@@ -7,6 +7,7 @@
 [ext_resource type="TileSet" uid="uid://blhd0ogpuydej" path="res://assets/tilesets/tiles_spikes.tres" id="3_lf3dd"]
 [ext_resource type="Texture2D" uid="uid://elfqj4ni4jxs" path="res://assets/environment/back.png" id="6_koqi2"]
 [ext_resource type="Texture2D" uid="uid://c74m2qnljojh0" path="res://assets/environment/middle.png" id="7_u3ww4"]
+[ext_resource type="PackedScene" uid="uid://8coddb1x0kfb" path="res://ui/hud.tscn" id="8_xyj3u"]
 
 [node name="LevelBase" type="Node2D"]
 script = ExtResource("1_v78i6")
@@ -50,3 +51,10 @@ format = 2
 [node name="Player" parent="." instance=ExtResource("2_xs8wf")]
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("8_xyj3u")]
+
+[connection signal="score_changed" from="." to="CanvasLayer/HUD" method="update_score"]
+[connection signal="life_changed" from="Player" to="CanvasLayer/HUD" method="update_life"]
