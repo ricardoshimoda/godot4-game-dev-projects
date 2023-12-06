@@ -1,17 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8blqg7xk4xa8"]
+[gd_scene load_steps=8 format=3 uid="uid://c8blqg7xk4xa8"]
 
 [ext_resource type="TileSet" uid="uid://dhxw3f8l2saqn" path="res://assets/tilesets/tiles_world.tres" id="1_gprqv"]
 [ext_resource type="Script" path="res://levels/level_base.gd" id="1_v78i6"]
 [ext_resource type="TileSet" uid="uid://dn505hopwb4de" path="res://assets/tilesets/tiles_items.tres" id="2_qonlk"]
 [ext_resource type="PackedScene" uid="uid://dnpawn0gj2klg" path="res://player/player.tscn" id="2_xs8wf"]
 [ext_resource type="TileSet" uid="uid://blhd0ogpuydej" path="res://assets/tilesets/tiles_spikes.tres" id="3_lf3dd"]
+[ext_resource type="Texture2D" uid="uid://elfqj4ni4jxs" path="res://assets/environment/back.png" id="6_koqi2"]
+[ext_resource type="Texture2D" uid="uid://c74m2qnljojh0" path="res://assets/environment/middle.png" id="7_u3ww4"]
 
 [node name="LevelBase" type="Node2D"]
 script = ExtResource("1_v78i6")
 
-[node name="Player" parent="." instance=ExtResource("2_xs8wf")]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="SpawnPoint" type="Marker2D" parent="."]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(576, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_koqi2")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(880, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 3
+position = Vector2(0, 140)
+texture = ExtResource("7_u3ww4")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 880, 368)
 
 [node name="World" type="TileMap" parent="."]
 tile_set = ExtResource("1_gprqv")
@@ -25,3 +46,7 @@ format = 2
 [node name="Danger" type="TileMap" parent="."]
 tile_set = ExtResource("3_lf3dd")
 format = 2
+
+[node name="Player" parent="." instance=ExtResource("2_xs8wf")]
+
+[node name="SpawnPoint" type="Marker2D" parent="."]

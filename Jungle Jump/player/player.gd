@@ -28,11 +28,17 @@ func change_state(new_state):
 			$AnimationPlayer.play("idle")
 		RUN:
 			$AnimationPlayer.play("run")
+			if (velocity.x == 0):
+				print ("this is weird")
 		HURT:
 			$AnimationPlayer.play("hurt")
-			velocity.y = -200
-			velocity.x = -100 * sign(velocity.x)
 			life -= 1
+			if life > 0:
+				var bounce_velocity = velocity.x
+				if (bounce_velocity == 0):
+					bounce_velocity = run_speed
+				velocity.y = -200
+				velocity.x = -100
 			await get_tree().create_timer(0.5).timeout
 			change_state(IDLE)
 		JUMP:
@@ -74,6 +80,12 @@ func _physics_process(delta):
 	velocity.y = gravity * delta
 	get_input()
 	move_and_slide()
+	if state == HURT:
+		return
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().is_in_group("danger"):
+			hurt()
 
 func reset(_position):
 	life = 3
