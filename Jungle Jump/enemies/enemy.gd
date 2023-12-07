@@ -25,6 +25,7 @@ func _physics_process(delta):
 func take_damage():
 	$AnimationPlayer.play("death")
 	$CollisionShape2D.set_deferred("disabled", true)
+	$Hit.play()
 	set_physics_process(false)
 
 

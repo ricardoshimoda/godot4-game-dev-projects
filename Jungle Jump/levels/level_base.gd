@@ -42,6 +42,7 @@ func spawn_items():
 
 func _on_item_picked_up(_score):
 	score += _score
+	$Pickup.play()
 
 func _on_door_entered(body):
 	GameState.next_level()

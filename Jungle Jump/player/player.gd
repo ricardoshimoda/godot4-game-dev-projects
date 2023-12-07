@@ -5,7 +5,7 @@ signal died
 
 @export var gravity = 750
 @export var run_speed = 150
-@export var jump_speed = -300 #interesting
+@export var jump_speed = 0 #interesting
 
 enum { IDLE, RUN, JUMP, HURT, DEAD }
 var state = IDLE
@@ -31,6 +31,7 @@ func change_state(new_state):
 			if (velocity.x == 0):
 				print ("this is weird")
 		HURT:
+			$Hurt.play()
 			$AnimationPlayer.play("hurt")
 			life -= 1
 			if life > 0:
@@ -38,10 +39,11 @@ func change_state(new_state):
 				if (bounce_velocity == 0):
 					bounce_velocity = run_speed
 				velocity.y = -200
-				velocity.x = -100
+				velocity.x = -100 * sign(bounce_velocity)
 				await get_tree().create_timer(0.5).timeout
 				change_state(IDLE)
 		JUMP:
+			$Jump.play()
 			$AnimationPlayer.play("jump_up")
 		DEAD:
 			died.emit()
@@ -77,7 +79,7 @@ func get_input():
 		change_state(JUMP)
 
 func _physics_process(delta):
-	velocity.y = gravity * delta
+	velocity.y += gravity * delta
 	get_input()
 	move_and_slide()
 	if state == HURT:
