@@ -34,5 +34,4 @@ func spawn_items():
 		item.picked_up.connect(self._on_item_picked_up.bind(item_score))
 
 func _on_item_picked_up(_score):
-	print("score:%s" % _score)
 	score += _score
