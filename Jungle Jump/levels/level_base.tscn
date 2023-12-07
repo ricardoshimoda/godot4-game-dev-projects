@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8blqg7xk4xa8"]
+[gd_scene load_steps=10 format=3 uid="uid://c8blqg7xk4xa8"]
 
 [ext_resource type="TileSet" uid="uid://dhxw3f8l2saqn" path="res://assets/tilesets/tiles_world.tres" id="1_gprqv"]
 [ext_resource type="Script" path="res://levels/level_base.gd" id="1_v78i6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://elfqj4ni4jxs" path="res://assets/environment/back.png" id="6_koqi2"]
 [ext_resource type="Texture2D" uid="uid://c74m2qnljojh0" path="res://assets/environment/middle.png" id="7_u3ww4"]
 [ext_resource type="PackedScene" uid="uid://8coddb1x0kfb" path="res://ui/hud.tscn" id="8_xyj3u"]
+[ext_resource type="AudioStream" uid="uid://0k12smxu6w0h" path="res://assets/audio/Grasslands Theme.ogg" id="9_uc8gl"]
 
 [node name="LevelBase" type="Node2D"]
 script = ExtResource("1_v78i6")
@@ -55,6 +56,11 @@ format = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("8_xyj3u")]
+
+[node name="Theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_uc8gl")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="score_changed" from="." to="CanvasLayer/HUD" method="update_score"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
