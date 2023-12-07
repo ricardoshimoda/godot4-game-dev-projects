@@ -39,8 +39,8 @@ func change_state(new_state):
 					bounce_velocity = run_speed
 				velocity.y = -200
 				velocity.x = -100
-			await get_tree().create_timer(0.5).timeout
-			change_state(IDLE)
+				await get_tree().create_timer(0.5).timeout
+				change_state(IDLE)
 		JUMP:
 			$AnimationPlayer.play("jump_up")
 		DEAD:

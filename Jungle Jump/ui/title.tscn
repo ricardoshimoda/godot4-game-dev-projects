@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://w31dv43pec7u"]
+[gd_scene load_steps=9 format=3 uid="uid://w31dv43pec7u"]
 
+[ext_resource type="Script" path="res://ui/title.gd" id="1_feodx"]
 [ext_resource type="Texture2D" uid="uid://elfqj4ni4jxs" path="res://assets/environment/back.png" id="1_qhjdr"]
 [ext_resource type="Texture2D" uid="uid://c74m2qnljojh0" path="res://assets/environment/middle.png" id="2_o761w"]
 [ext_resource type="FontFile" uid="uid://buosaulgdl55e" path="res://assets/Kenney Thick.ttf" id="3_htgyd"]
@@ -92,6 +93,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_feodx")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

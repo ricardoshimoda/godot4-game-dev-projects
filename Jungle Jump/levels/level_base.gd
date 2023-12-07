@@ -35,3 +35,7 @@ func spawn_items():
 
 func _on_item_picked_up(_score):
 	score += _score
+
+
+func _on_player_died():
+	GameState.restart()

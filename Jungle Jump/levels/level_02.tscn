@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca8cw014lee0j"]
+
+[ext_resource type="PackedScene" uid="uid://c8blqg7xk4xa8" path="res://levels/level_base.tscn" id="1_rxsr1"]
+[ext_resource type="PackedScene" uid="uid://bjkr701sg1581" path="res://enemies/enemy.tscn" id="2_2ioww"]
+
+[node name="Level01" instance=ExtResource("1_rxsr1")]
+
+[node name="Enemy" parent="." index="0" instance=ExtResource("2_2ioww")]
+position = Vector2(197, 82)
+
+[node name="ParallaxBackground" parent="." index="1"]
+visible = false
+
+[node name="World" parent="." index="2"]
+layer_0/tile_data = PackedInt32Array(393216, 196608, 1, 393217, 196608, 1, 393218, 196608, 1, 393219, 196608, 1, 393220, 196608, 1, 393221, 196608, 1, 393222, 196608, 1, 393223, 196608, 1, 393224, 196608, 1, 393225, 196608, 1, 393226, 196608, 1, 393227, 196608, 1, 393228, 196608, 1, 458751, 327680, 1, 393229, 65536, 1, 393236, 196608, 1, 393237, 196608, 1, 393238, 196608, 1, 393239, 196608, 1, 393240, 196608, 1, 393241, 196608, 1, 393242, 196608, 1, 458765, 65536, 3, 524301, 65536, 3, 589837, 65536, 3, 655373, 65536, 3, 393233, 327680, 1, 393234, 196608, 1, 393235, 196608, 1, 458769, 327680, 3, 524305, 327680, 3, 589841, 327680, 3, 655377, 327680, 3)
+
+[node name="Items" parent="." index="3"]
+visible = true
+layer_0/tile_data = PackedInt32Array(327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 327702, 1, 0, 327703, 1, 0, 327704, 1, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0)
+
+[node name="Danger" parent="." index="4" groups=["danger"]]
+layer_0/tile_data = PackedInt32Array(655374, 589824, 12, 655375, 589824, 12, 655376, 589824, 12)
+
+[node name="Player" parent="." index="5"]
+position = Vector2(103, 77)
+jump_speed = -3000
+
+[node name="SpawnPoint" parent="." index="6"]
+position = Vector2(103, 77)
