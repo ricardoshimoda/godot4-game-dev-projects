@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnpawn0gj2klg"]
+[gd_scene load_steps=14 format=3 uid="uid://dnpawn0gj2klg"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_767bc"]
 [ext_resource type="Texture2D" uid="uid://lqals8v555pu" path="res://assets/player_sheet.png" id="1_jmebg"]
@@ -88,8 +88,27 @@ tracks/0/keys = {
 "values": [13, 18]
 }
 
+[sub_resource type="Animation" id="Animation_j78os"]
+resource_name = "climb"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 0, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xy3es"]
 _data = {
+"climb": SubResource("Animation_j78os"),
 "hurt": SubResource("Animation_4gwmq"),
 "idle": SubResource("Animation_ix8tm"),
 "jump_down": SubResource("Animation_ke623"),
@@ -99,6 +118,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rg6h3"]
 size = Vector2(10, 21)
+
+[sub_resource type="Gradient" id="Gradient_whfqw"]
+colors = PackedColorArray(0.949998, 0.881652, 0.560757, 1, 0.94902, 0.882353, 0.560784, 0)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -110,7 +132,7 @@ metadata/_edit_group_ = true
 position = Vector2(0, -16)
 texture = ExtResource("1_jmebg")
 hframes = 19
-frame = 8
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -131,3 +153,18 @@ volume_db = -20.0
 [node name="Hurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_dlg33")
 volume_db = -10.0
+
+[node name="Dust" type="CPUParticles2D" parent="."]
+position = Vector2(-2, 0)
+rotation = -1.5708
+emitting = false
+amount = 20
+lifetime = 0.45
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.7
+emission_shape = 3
+emission_rect_extents = Vector2(1, 6)
+initial_velocity_max = 10.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_whfqw")
