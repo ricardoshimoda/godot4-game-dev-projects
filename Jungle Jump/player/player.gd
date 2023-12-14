@@ -62,16 +62,15 @@ func get_input():
 	if state == HURT:
 		return
 	
-	var up = Input.is_action_pressed("climb")
+	var up = Input.is_action_pressed("up")
 	var down = Input.is_action_pressed("down")
 	var right = Input.is_action_pressed("right")
 	var left = Input.is_action_pressed("left")
 	var jump = Input.is_action_just_pressed("jump")
 	
 	velocity.x = 0
-	velocity.y = 0
 	
-	if up and state != CLIMB and is_on_ladder:
+	if (up or down) and state != CLIMB and is_on_ladder:
 		change_state(CLIMB)
 	if state == CLIMB:
 		if up:
