@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://baet8tb365adh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e7c86"]
+
+[node name="TestScene" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_e7c86")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.771725, 0.635957, 0, -0.635957, 0.771725, -0.124674, 2.00213, 2.87211)
+fov = 90.0
