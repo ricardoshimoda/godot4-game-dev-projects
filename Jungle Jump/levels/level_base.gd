@@ -35,7 +35,6 @@ func spawn_items():
 			door.body_entered.connect(_on_door_entered)
 		else:
 			var item_score = data.get_custom_data("score")
-			print("type:%s score:%s" % [type, item_score] )
 			var item = item_scene.instantiate()
 			add_child(item)
 			item.init(type, $Items.map_to_local(cell))
