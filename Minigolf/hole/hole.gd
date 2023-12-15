@@ -4,6 +4,7 @@ enum {START, AIM, SET_POWER, SHOOT, WIN}
 
 @export var power_speed = 100
 @export var angle_speed = 1.1
+@export var mouse_sensitivity = 150
 
 var angle_change = 1
 var power = 0: set = set_power
@@ -51,6 +52,8 @@ func change_state(new_state):
 			$UI.show_message("Win!")
 
 func _input(event):
+	if event is InputEventMouseMotion and state == AIM:
+		$Arrow.rotation.y -= event.relative.x / mouse_sensitivity
 	if event.is_action_pressed("click"):
 		match state:
 			AIM:
@@ -60,8 +63,6 @@ func _input(event):
 
 func _process(delta):
 	match state:
-		AIM:
-			animate_arrow(delta)
 		SET_POWER:
 			animate_power(delta)
 		SHOOT:
