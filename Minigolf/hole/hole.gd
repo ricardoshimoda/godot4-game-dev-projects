@@ -25,11 +25,12 @@ func _ready():
 	$Arrow.hide()
 	$Ball.position = $Tee.position
 	$UI.show_message("Get Ready!")
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 func set_start_angle():
-	var hole_position = Vector2($Target.position.x, $Target.position.z)
-	var ball_position = Vector2($Ball.position.x, $Ball.position.z)
-	hole_dir = (hole_position - ball_position).angle() + PI/2
+	var hole_position = Vector2($Target.position.z, $Target.position.x)
+	var ball_position = Vector2($Ball.position.z, $Ball.position.x)
+	hole_dir = (ball_position - hole_position).angle()
 	$Arrow.rotation.y = hole_dir
 	
 func change_state(new_state):
@@ -52,9 +53,14 @@ func change_state(new_state):
 			$UI.show_message("Win!")
 
 func _input(event):
-	if event is InputEventMouseMotion and state == AIM:
-		$Arrow.rotation.y -= event.relative.x / mouse_sensitivity
+	if event.is_action_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	#if event is InputEventMouseMotion and state == AIM:
+	#	$Arrow.rotation.y -= event.relative.x / mouse_sensitivity
 	if event.is_action_pressed("click"):
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			return
 		match state:
 			AIM:
 				change_state(SET_POWER)
@@ -62,6 +68,8 @@ func _input(event):
 				change_state(SHOOT)
 
 func _process(delta):
+	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+		return
 	match state:
 		SET_POWER:
 			animate_power(delta)

@@ -48,12 +48,12 @@ data = {
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.573576, -0.802707, 0.163313, 0, 0.199368, 0.979925, -0.819152, -0.562062, 0.114353, 2.6, 4, 1)
-current = true
 
 [node name="Target" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.498, 0, -0.499)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Target"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.49812, 0.370977, -0.499141)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.371, 0)
 shape = SubResource("CylinderShape3D_ink08")
 
 [node name="Tee" type="Marker3D" parent="."]
@@ -70,8 +70,8 @@ visible = false
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 1)
-visible = false
 projection = 1
+current = true
 size = 6.0
 near = 0.583
 
