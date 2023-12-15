@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://csr43bvoqdbrj"]
+[gd_scene load_steps=5 format=3 uid="uid://csr43bvoqdbrj"]
+
+[ext_resource type="Script" path="res://ball.gd" id="1_tmgdf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_irufe"]
 bounce = 0.25
@@ -15,6 +17,7 @@ physics_material_override = SubResource("PhysicsMaterial_irufe")
 continuous_cd = true
 linear_damp = 0.5
 angular_damp = 1.0
+script = ExtResource("1_tmgdf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_4umpk")

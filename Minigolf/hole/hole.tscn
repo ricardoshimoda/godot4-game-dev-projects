@@ -1,8 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://b8g06fakclmwh"]
 
 [ext_resource type="MeshLibrary" uid="uid://g7rie4nh5rkf" path="res://assets/golf_tiles.tres" id="1_4krvn"]
+[ext_resource type="Script" path="res://hole/hole.gd" id="1_qpqvn"]
 [ext_resource type="PackedScene" uid="uid://csr43bvoqdbrj" path="res://ball.tscn" id="2_egw1j"]
 [ext_resource type="PackedScene" uid="uid://x4vlvc3ps6m1" path="res://ui/ui.tscn" id="3_8f3o5"]
+[ext_resource type="PackedScene" uid="uid://p4y0olyw50uy" path="res://ui/arrow.tscn" id="5_c2lmo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jo264"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -25,14 +27,8 @@ bounce = 0.5
 height = 0.25
 radius = 0.08
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vi18e"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_4e6gn"]
-material = SubResource("StandardMaterial3D_vi18e")
-radius = 0.15
-height = 0.3
-
 [node name="Hole" type="Node3D"]
+script = ExtResource("1_qpqvn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_j6epe")
@@ -60,13 +56,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.49812, 0.370977, -0.499141)
 shape = SubResource("CylinderShape3D_ink08")
 
 [node name="Tee" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49249, 0.121159, 3.79082)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Tee"]
-visible = false
-mesh = SubResource("SphereMesh_4e6gn")
-
-[node name="Ball" parent="Tee" instance=ExtResource("2_egw1j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.492, 1.321, 3.791)
 
 [node name="UI" parent="." instance=ExtResource("3_8f3o5")]
+
+[node name="Ball" parent="." instance=ExtResource("2_egw1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49249, 1.32116, 3.79082)
+
+[node name="Arrow" parent="." instance=ExtResource("5_c2lmo")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.53172, 1.34046, 0)
+visible = false
+
+[connection signal="body_entered" from="Hole" to="." method="_on_hole_body_entered"]
+[connection signal="stopped" from="Ball" to="." method="_on_ball_stopped"]

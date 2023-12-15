@@ -34,6 +34,8 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Get Ready!"
 label_settings = SubResource("LabelSettings_nfeip")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 40.0
