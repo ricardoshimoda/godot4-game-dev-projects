@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://kfy0vijpkgwr"]
+
+[ext_resource type="PackedScene" uid="uid://b8g06fakclmwh" path="res://hole/hole.tscn" id="1_egga6"]
+
+[node name="Hole" instance=ExtResource("1_egga6")]
