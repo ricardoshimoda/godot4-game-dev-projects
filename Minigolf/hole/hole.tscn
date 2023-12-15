@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8g06fakclmwh"]
+[gd_scene load_steps=12 format=3 uid="uid://b8g06fakclmwh"]
 
 [ext_resource type="MeshLibrary" uid="uid://g7rie4nh5rkf" path="res://assets/golf_tiles.tres" id="1_4krvn"]
 [ext_resource type="Script" path="res://hole/hole.gd" id="1_qpqvn"]
 [ext_resource type="PackedScene" uid="uid://csr43bvoqdbrj" path="res://ball.tscn" id="2_egw1j"]
 [ext_resource type="PackedScene" uid="uid://x4vlvc3ps6m1" path="res://ui/ui.tscn" id="3_8f3o5"]
 [ext_resource type="PackedScene" uid="uid://p4y0olyw50uy" path="res://ui/arrow.tscn" id="5_c2lmo"]
+[ext_resource type="PackedScene" uid="uid://cj5qxrrk1qrbi" path="res://camera_gimbal.tscn" id="6_kl5bm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jo264"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -46,9 +47,6 @@ data = {
 "cells": PackedInt32Array(1, 65534, 655369, 0, 65535, 1441801, 1, 3, 22, 1, 0, 24, 1, 1, 24, 1, 2, 24, 1, 65535, 15, 2, 65535, 1441816, 3, 65535, 1441816, 4, 65535, 1048577)
 }
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.573576, -0.802707, 0.163313, 0, 0.199368, 0.979925, -0.819152, -0.562062, 0.114353, 2.6, 4, 1)
-
 [node name="Target" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.498, 0, -0.499)
 
@@ -68,12 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49249, 1.32116, 3.79082)
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.53172, 1.34046, 0)
 visible = false
 
-[node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 1)
-projection = 1
-current = true
-size = 6.0
-near = 0.583
+[node name="CameraGimbal" parent="." instance=ExtResource("6_kl5bm")]
 
 [connection signal="body_entered" from="Target" to="." method="_on_hole_body_entered"]
 [connection signal="stopped" from="Ball" to="." method="_on_ball_stopped"]

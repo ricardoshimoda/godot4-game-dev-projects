@@ -55,8 +55,8 @@ func change_state(new_state):
 func _input(event):
 	if event.is_action_pressed("ui_cancel") and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	#if event is InputEventMouseMotion and state == AIM:
-	#	$Arrow.rotation.y -= event.relative.x / mouse_sensitivity
+	if event is InputEventMouseMotion and state == AIM:
+		$Arrow.rotation.y -= event.relative.x / mouse_sensitivity
 	if event.is_action_pressed("click"):
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -70,6 +70,8 @@ func _input(event):
 func _process(delta):
 	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		return
+	if state != WIN:
+		$CameraGimbal.position = $Ball.position
 	match state:
 		SET_POWER:
 			animate_power(delta)
