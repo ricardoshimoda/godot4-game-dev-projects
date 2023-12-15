@@ -24,13 +24,21 @@ func _ready():
 	$Arrow.hide()
 	$Ball.position = $Tee.position
 	$UI.show_message("Get Ready!")
-
+	
+func set_start_angle():
+	var hole_position = Vector2($Target.position.x, $Target.position.z)
+	var ball_position = Vector2($Ball.position.x, $Ball.position.z)
+	hole_dir = (hole_position - ball_position).angle() + PI/2
+	$Arrow.rotation.y = hole_dir
+	
 func change_state(new_state):
 	state = new_state
 	match state:
 		AIM:
 			$Arrow.position = $Ball.position
+			$Arrow.position.y -= 0.05
 			$Arrow.show()
+			set_start_angle()
 		SET_POWER:
 			power = 0
 		SHOOT:
@@ -61,9 +69,9 @@ func _process(delta):
 
 func animate_arrow(delta):
 	$Arrow.rotation.y += angle_speed * angle_change * delta
-	if $Arrow.rotation.y > PI / 2:
+	if $Arrow.rotation.y > hole_dir + PI/2:
 		angle_change = -1
-	if $Arrow.rotation.y < -PI/2:
+	if $Arrow.rotation.y < hole_dir - PI/2:
 		angle_change = 1
 
 func animate_power(delta):

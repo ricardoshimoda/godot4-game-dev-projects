@@ -48,10 +48,11 @@ data = {
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.573576, -0.802707, 0.163313, 0, 0.199368, 0.979925, -0.819152, -0.562062, 0.114353, 2.6, 4, 1)
+current = true
 
-[node name="Hole" type="Area3D" parent="."]
+[node name="Target" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hole"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Target"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.49812, 0.370977, -0.499141)
 shape = SubResource("CylinderShape3D_ink08")
 
@@ -67,6 +68,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49249, 1.32116, 3.79082)
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.53172, 1.34046, 0)
 visible = false
 
-[connection signal="body_entered" from="Hole" to="." method="_on_hole_body_entered"]
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 1)
+visible = false
+projection = 1
+size = 6.0
+near = 0.583
+
+[connection signal="body_entered" from="Target" to="." method="_on_hole_body_entered"]
 [connection signal="stopped" from="Ball" to="." method="_on_ball_stopped"]
 [connection signal="touching" from="Ball" to="." method="_on_ball_touching"]
