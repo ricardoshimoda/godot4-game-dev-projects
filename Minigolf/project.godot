@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Minigolf"
-run/main_scene="res://hole/hole.tscn"
+run/main_scene="res://hole/first_hole.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

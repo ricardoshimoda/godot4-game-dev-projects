@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal messaged
+
 @onready var power_bar = $MarginContainer/VBoxContainer/PowerBar
 @onready var shots = $MarginContainer/VBoxContainer/Shots
 
@@ -25,3 +27,4 @@ func show_message(text):
 	$Message.show()
 	await get_tree().create_timer(2).timeout
 	$Message.hide()
+	messaged.emit()

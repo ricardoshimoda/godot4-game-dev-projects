@@ -5,6 +5,7 @@ enum {START, AIM, SET_POWER, SHOOT, WIN}
 @export var power_speed = 100
 @export var angle_speed = 1.1
 @export var mouse_sensitivity = 150
+@export var next_hole:PackedScene
 
 var angle_change = 1
 var power = 0: set = set_power
@@ -103,3 +104,10 @@ func _on_ball_stopped():
 func _on_ball_touching():
 	if state == START:
 		change_state(AIM)
+
+func _on_ui_messaged():
+	print("going to the next level!")
+	print(state==WIN)
+	print(next_hole)
+	if state == WIN and next_hole:
+		get_tree().change_scene_to_packed(next_hole)
