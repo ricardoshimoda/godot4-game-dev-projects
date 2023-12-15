@@ -69,3 +69,4 @@ visible = false
 
 [connection signal="body_entered" from="Hole" to="." method="_on_hole_body_entered"]
 [connection signal="stopped" from="Ball" to="." method="_on_ball_stopped"]
+[connection signal="touching" from="Ball" to="." method="_on_ball_touching"]

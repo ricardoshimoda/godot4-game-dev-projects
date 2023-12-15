@@ -1,6 +1,6 @@
 extends Node3D
 
-enum {AIM, SET_POWER, SHOOT, WIN}
+enum {START, AIM, SET_POWER, SHOOT, WIN}
 
 @export var power_speed = 100
 @export var angle_speed = 1.1
@@ -9,7 +9,8 @@ var angle_change = 1
 var power = 0: set = set_power
 var power_change = 1
 var shots = 0: set = set_shot
-var state = AIM
+var state = START
+var hole_dir
 
 func set_power(value):
 	power = value
@@ -22,7 +23,6 @@ func set_shot(value):
 func _ready():
 	$Arrow.hide()
 	$Ball.position = $Tee.position
-	change_state(AIM)
 	$UI.show_message("Get Ready!")
 
 func change_state(new_state):
@@ -77,7 +77,10 @@ func _on_hole_body_entered(body):
 	if body.name == "Ball":
 		change_state(WIN)
 
-
 func _on_ball_stopped():
 	if state == SHOOT:
+		change_state(AIM)
+
+func _on_ball_touching():
+	if state == START:
 		change_state(AIM)
