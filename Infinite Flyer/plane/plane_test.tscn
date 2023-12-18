@@ -5,6 +5,7 @@
 
 [node name="PlaneTest" type="Node3D"]
 script = ExtResource("1_vtfty")
+forward_speed = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.990543, 0, 0.137202, 0, 1, 0, -0.137202, 0, -0.990543, 0, 2.63217, -5.65271)
