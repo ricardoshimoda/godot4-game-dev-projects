@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb3txa72kao16"]
+
+[ext_resource type="Texture2D" uid="uid://dxin0p3ks3pe7" path="res://assets/textures/texture_09.png" id="1_n0o3n"]
+[ext_resource type="FontFile" uid="uid://dwe354n1kha7i" path="res://assets/Baloo2-Medium.ttf" id="2_2kg40"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_85k1j"]
+height = 0.5
+radius = 3.49
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_miefs"]
+shading_mode = 0
+albedo_color = Color(0.66434, 0.66434, 0.66434, 1)
+albedo_texture = ExtResource("1_n0o3n")
+uv1_scale = Vector3(1, 9, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_10ndc"]
+material = SubResource("StandardMaterial3D_miefs")
+inner_radius = 3.5
+outer_radius = 4.0
+
+[sub_resource type="Animation" id="Animation_bm027"]
+resource_name = "Score"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.568627, 0.301961, 1), Color(0.580392, 0.94902, 0.188235, 1), Color(0, 0.568627, 0.301961, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_15jiy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_myo3s"]
+_data = {
+"RESET": SubResource("Animation_15jiy"),
+"Score": SubResource("Animation_bm027")
+}
+
+[node name="Ring" type="Area3D"]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_85k1j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("TorusMesh_10ndc")
+skeleton = NodePath("../..")
+
+[node name="Label3D" type="Label3D" parent="."]
+billboard = 1
+text = "100
+"
+font = ExtResource("2_2kg40")
+font_size = 720
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_myo3s")
+}
+autoplay = "Score"

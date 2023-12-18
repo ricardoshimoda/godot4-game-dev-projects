@@ -24,7 +24,7 @@ func _physics_process(delta):
 	rotation.x = clamp(rotation.x, -PI/4, PI/4)
 	$cartoon_plane.rotation.z = lerpf($cartoon_plane.rotation.z, roll_input, roll_speed * delta)
 	
-	velocity = transform.basis.z * forward_speed
-	velocity -= transform.basis.x * ($cartoon_plane.rotation.z / (0.25*PI)) * (forward_speed/2.0)
+	velocity = -transform.basis.z * forward_speed
+	velocity += transform.basis.x * ($cartoon_plane.rotation.z / (0.25*PI)) * (forward_speed/2.0)
 
 	move_and_slide()

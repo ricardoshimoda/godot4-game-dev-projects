@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg0tfm26sbmsv"]
+
+[ext_resource type="PackedScene" uid="uid://bj4fty2k8m72b" path="res://plane/plane.tscn" id="1_2454y"]
+[ext_resource type="Texture2D" uid="uid://dn6aqj5abxk70" path="res://assets/styled_sky.hdr" id="1_jsf54"]
+[ext_resource type="Script" path="res://main.gd" id="1_qcikr"]
+[ext_resource type="PackedScene" uid="uid://b063r5dp7d6cb" path="res://buildings/chunk.tscn" id="2_0c1jr"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="4_6yf4c"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_n8xnk"]
+panorama = ExtResource("1_jsf54")
+
+[sub_resource type="Sky" id="Sky_gx5sx"]
+sky_material = SubResource("PanoramaSkyMaterial_n8xnk")
+
+[sub_resource type="Environment" id="Environment_difnf"]
+background_mode = 2
+sky = SubResource("Sky_gx5sx")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_qcikr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_difnf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Plane" parent="." instance=ExtResource("1_2454y")]
+
+[node name="Chunk" parent="." instance=ExtResource("2_0c1jr")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("4_6yf4c")
+target_path = NodePath("../Plane")
+offset = Vector3(7, 7, 15)
