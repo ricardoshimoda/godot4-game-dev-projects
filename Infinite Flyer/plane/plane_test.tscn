@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bst5nedte5fkj"]
+[gd_scene load_steps=3 format=3 uid="uid://bst5nedte5fkj"]
 
 [ext_resource type="PackedScene" uid="uid://bj4fty2k8m72b" path="res://plane/plane.tscn" id="1_7541d"]
+[ext_resource type="Script" path="res://plane/plane_test.gd" id="1_vtfty"]
 
 [node name="PlaneTest" type="Node3D"]
-
-[node name="Plane" parent="." instance=ExtResource("1_7541d")]
+script = ExtResource("1_vtfty")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.990543, 0, 0.137202, 0, 1, 0, -0.137202, 0, -0.990543, 0, 0, -5.65271)
+transform = Transform3D(-0.990543, 0, 0.137202, 0, 1, 0, -0.137202, 0, -0.990543, 0, 2.63217, -5.65271)
+
+[node name="Plane" parent="." instance=ExtResource("1_7541d")]
+forward_speed = 1
