@@ -106,8 +106,9 @@ func _on_ball_touching():
 		change_state(AIM)
 
 func _on_ui_messaged():
-	print("going to the next level!")
-	print(state==WIN)
-	print(next_hole)
 	if state == WIN and next_hole:
 		get_tree().change_scene_to_packed(next_hole)
+
+func _on_ball_out_of_bounds():
+	if state != WIN:
+		get_tree().reload_current_scene()

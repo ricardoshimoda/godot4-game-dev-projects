@@ -2,6 +2,7 @@ extends RigidBody3D
 
 signal stopped
 signal touching
+signal out_of_bounds
 
 var first_touch = false
 
@@ -16,8 +17,8 @@ func _integrate_forces(state):
 	if state.linear_velocity.length() < 0.1:
 		stopped.emit()
 		state.linear_velocity = Vector3.ZERO
-	#if position.y < -20:
-		#get_tree().call_deferred("reload_current_scene")
+	if position.y < -20:
+		out_of_bounds.emit()
 
 func is_on_floor():
 	if test_move(global_transform, Vector3.DOWN*0.0001 * get_physics_process_delta_time() ) == true:  

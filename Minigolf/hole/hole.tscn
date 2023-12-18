@@ -17,8 +17,13 @@ sky_material = SubResource("ProceduralSkyMaterial_jo264")
 [sub_resource type="Environment" id="Environment_j6epe"]
 background_mode = 2
 sky = SubResource("Sky_j2te5")
+sky_custom_fov = 10.0
+ambient_light_source = 2
+ambient_light_color = Color(0.980392, 0.537255, 0.176471, 1)
+ambient_light_energy = 2.5
 tonemap_mode = 2
 glow_enabled = true
+glow_intensity = 1.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8flpc"]
 rough = true
@@ -71,5 +76,6 @@ visible = false
 
 [connection signal="body_entered" from="Target" to="." method="_on_hole_body_entered"]
 [connection signal="messaged" from="UI" to="." method="_on_ui_messaged"]
+[connection signal="out_of_bounds" from="Ball" to="." method="_on_ball_out_of_bounds"]
 [connection signal="stopped" from="Ball" to="." method="_on_ball_stopped"]
 [connection signal="touching" from="Ball" to="." method="_on_ball_touching"]
