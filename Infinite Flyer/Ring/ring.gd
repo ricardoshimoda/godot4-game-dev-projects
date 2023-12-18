@@ -13,7 +13,11 @@ func _ready():
 	if move_y:
 		tween.tween_property($CollisionShape3D, "position:y", -move_amount, move_speed)
 		tween.tween_property($CollisionShape3D, "position:y", move_amount, move_speed)
-		
+		tween.play()
+	if move_x:
+		tween.tween_property($CollisionShape3D, "position:x", -move_amount, move_speed)
+		tween.tween_property($CollisionShape3D, "position:x", move_amount, move_speed)
+		tween.play()
 
 func _on_body_entered(body):
 	$CollisionShape3D/MeshInstance3D.hide()
