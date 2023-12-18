@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bst5nedte5fkj"]
+
+[ext_resource type="PackedScene" uid="uid://bj4fty2k8m72b" path="res://plane/plane.tscn" id="1_7541d"]
+
+[node name="PlaneTest" type="Node3D"]
+
+[node name="Plane" parent="." instance=ExtResource("1_7541d")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.990543, 0, 0.137202, 0, 1, 0, -0.137202, 0, -0.990543, 0, 0, -5.65271)

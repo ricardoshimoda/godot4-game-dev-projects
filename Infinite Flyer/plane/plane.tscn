@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj4fty2k8m72b"]
+[gd_scene load_steps=5 format=3 uid="uid://bj4fty2k8m72b"]
 
+[ext_resource type="Script" path="res://plane/plane.gd" id="1_6dfh3"]
 [ext_resource type="PackedScene" uid="uid://twdhn75l1clu" path="res://assets/cartoon_plane.glb" id="1_fnmtr"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i0s6d"]
@@ -10,6 +11,7 @@ radius = 1.1
 size = Vector3(7.1, 0.4, 1.8)
 
 [node name="Plane" type="CharacterBody3D"]
+script = ExtResource("1_6dfh3")
 
 [node name="cartoon_plane" parent="." instance=ExtResource("1_fnmtr")]
 
