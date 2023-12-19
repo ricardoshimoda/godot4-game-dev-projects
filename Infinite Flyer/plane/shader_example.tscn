@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://byhcrp2pvvsnt"]
+
+[ext_resource type="Shader" path="res://plane/shader_example.gdshader" id="1_2m5gc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5lnp7"]
+render_priority = 0
+shader = ExtResource("1_2m5gc")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_otfl5"]
+material = SubResource("ShaderMaterial_5lnp7")
+subdivide_width = 32
+subdivide_depth = 32
+
+[node name="ShaderExample" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_otfl5")
