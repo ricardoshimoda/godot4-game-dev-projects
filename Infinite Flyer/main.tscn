@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dg0tfm26sbmsv"]
+[gd_scene load_steps=10 format=3 uid="uid://dg0tfm26sbmsv"]
 
 [ext_resource type="PackedScene" uid="uid://bj4fty2k8m72b" path="res://plane/plane.tscn" id="1_2454y"]
 [ext_resource type="Texture2D" uid="uid://dn6aqj5abxk70" path="res://assets/styled_sky.hdr" id="1_jsf54"]
 [ext_resource type="Script" path="res://main.gd" id="1_qcikr"]
 [ext_resource type="PackedScene" uid="uid://b063r5dp7d6cb" path="res://buildings/chunk.tscn" id="2_0c1jr"]
 [ext_resource type="Script" path="res://Camera3D.gd" id="4_6yf4c"]
+[ext_resource type="PackedScene" uid="uid://bvwndibv7at7i" path="res://ui/ui.tscn" id="6_j05f4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_n8xnk"]
 panorama = ExtResource("1_jsf54")
@@ -36,3 +37,9 @@ shadow_enabled = true
 script = ExtResource("4_6yf4c")
 target_path = NodePath("../Plane")
 offset = Vector3(7, 7, 15)
+
+[node name="UI" parent="." instance=ExtResource("6_j05f4")]
+
+[connection signal="dead" from="Plane" to="." method="_on_plane_dead"]
+[connection signal="fuel_changed" from="Plane" to="UI" method="update_fuel"]
+[connection signal="score_changed" from="Plane" to="UI" method="update_score"]

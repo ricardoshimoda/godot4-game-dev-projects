@@ -20,19 +20,26 @@ func _ready():
 		tween.play()
 
 func _on_body_entered(body):
+	$Collect.play(0.08)
 	$CollisionShape3D/MeshInstance3D.hide()
 	var d = global_position.distance_to(body.global_position)
 	if d < 2.0:
 		$Label3D.text = "200"
+		body.fuel = 10
+		body.score += 200
 	elif d > 3.5:
 		$Label3D.text = "50"
+		body.fuel += 1
+		body.score += 50
 	else:
 		$Label3D.text = "100"
+		body.fuel += 2.5
+		body.score += 100
 	$Label3D.show()
 	
 	var tween = create_tween().set_parallel()
 	tween.tween_property($Label3D, "position", Vector3(0,10,0), 1.0)
-	tween.tween_property($Lable3D, "modulate:a", 0.0, 0.5)
+	tween.tween_property($Label3D, "modulate:a", 0.0, 0.5)
 	
 func _process(delta):
 	$CollisionShape3D/MeshInstance3D.rotate_y(deg_to_rad(50) * delta)

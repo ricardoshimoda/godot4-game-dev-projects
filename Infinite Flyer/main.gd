@@ -4,6 +4,7 @@ var chunk = preload("res://buildings/chunk.tscn")
 var num_chunks = 1
 var chunk_size = 200
 var max_position = -100
+var title_screen = "res://ui/title_screen.tscn"
 
 func _process(delta):
 	if $Plane.position.z < max_position:
@@ -14,3 +15,5 @@ func _process(delta):
 		add_child(new_chunk)
 		max_position -= chunk_size
 		
+func _on_plane_dead():
+	get_tree().change_scene_to_file(title_screen)

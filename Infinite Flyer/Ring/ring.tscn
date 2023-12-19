@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bb3txa72kao16"]
+[gd_scene load_steps=11 format=3 uid="uid://bb3txa72kao16"]
 
 [ext_resource type="Texture2D" uid="uid://dxin0p3ks3pe7" path="res://assets/textures/texture_09.png" id="1_n0o3n"]
 [ext_resource type="Script" path="res://Ring/ring.gd" id="1_sc2om"]
 [ext_resource type="FontFile" uid="uid://dwe354n1kha7i" path="res://assets/Baloo2-Medium.ttf" id="2_2kg40"]
+[ext_resource type="AudioStream" uid="uid://c6uem1m2f3nv4" path="res://assets/audio/three_tone.wav" id="4_xroky"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_85k1j"]
 height = 0.5
@@ -80,5 +81,8 @@ libraries = {
 "": SubResource("AnimationLibrary_myo3s")
 }
 autoplay = "Score"
+
+[node name="Collect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xroky")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
