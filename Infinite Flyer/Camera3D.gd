@@ -11,7 +11,7 @@ func _ready():
 		position = target.position + offset
 		look_at(target.position)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !target:
 		return
 	position = target.position + offset

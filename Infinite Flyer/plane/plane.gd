@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+signal explode
 signal dead
 signal score_changed
 signal fuel_changed
@@ -52,7 +53,8 @@ func _physics_process(delta):
 		die()
 		
 func die():
-	$Boom.play()
+	explode.emit()
+	$Boom.play(0.20)
 	set_physics_process(false)
 	$cartoon_plane.hide()
 	$Explosion.show()
