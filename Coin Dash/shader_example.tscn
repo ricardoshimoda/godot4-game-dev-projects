@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://blf54bvqfxvre"]
+
+[ext_resource type="Texture2D" uid="uid://b25oxv0ljgijp" path="res://assets/player/idle/player-idle-1.png" id="1_grppp"]
+[ext_resource type="Shader" path="res://playeridle.gdshader" id="1_h6021"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_24a5a"]
+shader = ExtResource("1_h6021")
+
+[node name="ShaderExample" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_24a5a")
+texture = ExtResource("1_grppp")
