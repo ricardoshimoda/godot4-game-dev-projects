@@ -5,6 +5,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_24a5a"]
 shader = ExtResource("1_h6021")
+shader_parameter/line_color = Color(0, 1, 0, 1)
+shader_parameter/line_thickness = 0.5
 
 [node name="ShaderExample" type="Node2D"]
 
