@@ -59,6 +59,9 @@ func die():
 	$cartoon_plane.hide()
 	$Explosion.show()
 	$Explosion.play("default")
+	if score > Global.high_score:
+		Global.high_score = score
+		Global.save_score()
 	await $Explosion.animation_finished
 	await $Boom.finished
 	$Explosion.hide()
